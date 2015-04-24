@@ -519,6 +519,7 @@
 
 endmodule // cache
 
+//// 1 set module is equivalent to 1 way cache memory bank ////
 module set(clk,
            rst,
            entry,
@@ -563,7 +564,7 @@ module set(clk,
 
     assign wb_addr = {i_tag, entry};
 
-    //write -> [3:0] write, writedata/readdata 32bit -> 128bit
+    // write -> [3:0] write, writedata/readdata 32bit -> 128bit
     simple_ram #(.width(8), .widthad(cache_entry)) ram11_3(clk, entry, write && word_en[3]  && byte_en[3], writedata[127:120], entry, readdata[127:120]);
     simple_ram #(.width(8), .widthad(cache_entry)) ram11_2(clk, entry, write && word_en[3]  && byte_en[2], writedata[119:112], entry, readdata[119:112]);
     simple_ram #(.width(8), .widthad(cache_entry)) ram11_1(clk, entry, write && word_en[3]  && byte_en[1], writedata[111:104], entry, readdata[111:104]);
